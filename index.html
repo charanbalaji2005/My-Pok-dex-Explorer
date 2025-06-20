@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokédex Explorer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-animation">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+    
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/PokeAPI/media/master/logo/pokeapi_256.png" alt="PokéAPI Logo">
+            </div>
+            <h1>Pokédex Explorer</h1>
+            <div class="search-container">
+                <input type="text" id="pokemon-search" placeholder="Search Pokémon..." autocomplete="off">
+                <button id="search-btn"><i class="fas fa-search"></i></button>
+                <div class="search-suggestions" id="search-suggestions"></div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="pokemon-display">
+                <div class="pokemon-card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="pokemon-image-container">
+                                <img id="pokemon-image" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/132.png" alt="Pokémon" class="pokemon-image">
+                                <div class="shine"></div>
+                                <div class="glow"></div>
+                            </div>
+                            <div class="pokemon-info">
+                                <h2 id="pokemon-name">Ditto</h2>
+                                <div class="pokemon-types" id="pokemon-types">
+                                    <span class="type normal">Normal</span>
+                                </div>
+                                <div class="pokemon-id">#<span id="pokemon-id">132</span></div>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <div class="stats-container">
+                                <h3>Stats</h3>
+                                <div class="stats" id="pokemon-stats">
+                                    <!-- Stats will be populated here -->
+                                </div>
+                            </div>
+                            <div class="abilities-container">
+                                <h3>Abilities</h3>
+                                <div class="abilities" id="pokemon-abilities">
+                                    <!-- Abilities will be populated here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="flip-btn" id="flip-btn">
+                    <i class="fas fa-sync-alt"></i> Flip Card
+                </button>
+            </div>
+
+            <div class="pokemon-details">
+                <div class="details-section">
+                    <h3>About</h3>
+                    <div class="detail-row">
+                        <span class="detail-label">Height</span>
+                        <span class="detail-value" id="pokemon-height">0.3 m</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Weight</span>
+                        <span class="detail-value" id="pokemon-weight">4.0 kg</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Base Experience</span>
+                        <span class="detail-value" id="pokemon-exp">101</span>
+                    </div>
+                </div>
+
+                <div class="details-section">
+                    <h3>Moves</h3>
+                    <div class="moves-container" id="pokemon-moves">
+                        <!-- Moves will be populated here -->
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <div class="evolution-chain" id="evolution-chain">
+            <h2>Evolution Chain</h2>
+            <div class="evolution-stages" id="evolution-stages">
+                <!-- Evolution chain will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Not Found Popup -->
+    <div class="not-found-popup" id="not-found-popup">
+        <div class="popup-content">
+            <div class="pokeball-icon">
+                <div class="pokeball-top"></div>
+                <div class="pokeball-bottom"></div>
+                <div class="pokeball-center"></div>
+            </div>
+            <h2>Pokémon Not Found!</h2>
+            <p>We couldn't find "<span id="searched-name"></span>" in our Pokédex.</p>
+            <button class="close-popup">Try Again</button>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Pokédex Explorer</h3>
+                <p>The ultimate Pokémon encyclopedia with detailed information, stats, and evolution chains for all your favorite Pokémon.</p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="https://x.com/i/flow/login" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/accounts/login/?hl=en" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://github.com/login" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Pokémon List</a></li>
+                    <li><a href="#">Types Chart</a></li>
+                    <li><a href="#">About PokéAPI</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="https://pokeapi.co/" target="_blank">PokéAPI</a></li>
+                    <li><a href="https://www.pokemon.com/" target="_blank">Official Pokémon Site</a></li>
+                    <li><a href="https://bulbapedia.bulbagarden.net/" target="_blank">Bulbapedia</a></li>
+                    <li><a href="https://www.serebii.net/" target="_blank">Serebii</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Pokédex Explorer. All Pokémon data and images belong to Nintendo, Game Freak, and The Pokémon Company.</p>
+            <p>This is a fan-made project using the <a href="https://pokeapi.co/" target="_blank">PokéAPI</a>.</p>
+        </div>
+        
+        <div class="pokeball-animation">
+            <div class="pokeball">
+                <div class="pokeball-top"></div>
+                <div class="pokeball-center"></div>
+                <div class="pokeball-bottom"></div>
+            </div>
+        </div>
+        
+        <div class="legal-links">
+            <a href="#" id="terms-link">Terms & Conditions</a> | 
+            <a href="#" id="privacy-link">Privacy Policy</a> | 
+            <a href="#" id="disclaimer-link">Disclaimer</a>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div class="modal" id="terms-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Terms and Conditions</h2>
+            <div class="modal-body">
+                <h3>Last Updated: [Date]</h3>
+                
+                <h4>1. Acceptance of Terms</h4>
+                <p>By accessing and using Pokédex Explorer ("the Site"), you accept and agree to be bound by these Terms and Conditions.</p>
+                
+                <h4>2. Use of Content</h4>
+                <p>All Pokémon content is property of Nintendo, Game Freak, and The Pokémon Company. This fan site uses data from PokéAPI under fair use principles for educational and informational purposes only.</p>
+                
+                <h4>3. User Responsibilities</h4>
+                <p>You agree not to:</p>
+                <ul>
+                    <li>Use the Site for any unlawful purpose</li>
+                    <li>Attempt to access restricted areas of the Site</li>
+                    <li>Use automated systems to extract data</li>
+                    <li>Misrepresent the Site's content as official</li>
+                </ul>
+                
+                <h4>4. Limitation of Liability</h4>
+                <p>We are not responsible for any inaccuracies in Pokémon data or any damages resulting from Site use.</p>
+                
+                <h4>5. Changes to Terms</h4>
+                <p>We may modify these terms at any time. Continued use constitutes acceptance.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="privacy-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Privacy Policy</h2>
+            <div class="modal-body">
+                <h3>Last Updated: [Date]</h3>
+                
+                <h4>1. Information Collection</h4>
+                <p>We do not collect personal information except:</p>
+                <ul>
+                    <li>Search queries (not stored)</li>
+                    <li>Anonymous analytics via Cloudflare</li>
+                    <li>Cookies for basic functionality</li>
+                </ul>
+                
+                <h4>2. Third-Party Services</h4>
+                <p>The Site uses:</p>
+                <ul>
+                    <li>PokéAPI (data source)</li>
+                    <li>Cloudflare (performance & security)</li>
+                    <li>Font Awesome (icons)</li>
+                </ul>
+                
+                <h4>3. Children's Privacy</h4>
+                <p>We comply with COPPA and do not knowingly collect data from children under 13.</p>
+                
+                <h4>4. Data Security</h4>
+                <p>While we implement security measures, no internet transmission is 100% secure.</p>
+                
+                <h4>5. Your Rights</h4>
+                <p>You may request deletion of any accidental personal data collection.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="disclaimer-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Disclaimer</h2>
+            <div class="modal-body">
+                <p>Pokédex Explorer is a fan-made project not affiliated with Nintendo, Game Freak, or The Pokémon Company.</p>
+                <p>All copyrighted content is property of their respective owners. Pokémon and Pokémon character names are trademarks of Nintendo.</p>
+                <p>Data is provided by <a href="https://pokeapi.co/" target="_blank">PokéAPI</a> without warranty of accuracy.</p>
+                <p>This site does not collect or store personal user data beyond basic analytics.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="notification" id="notification"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
