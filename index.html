@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Pokédex Explorer</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="notification" id="notification"></div>
     <div class="background-animation">
         <div class="particle"></div>
         <div class="particle"></div>
@@ -252,6 +253,56 @@
     </div>
 
     <div class="notification" id="notification"></div>
+    <script>
+// Prevent zooming
+document.addEventListener('gesturestart', function(e) {
+    e.preventDefault();
+    document.body.style.zoom = 1.0;
+});
+
+document.addEventListener('wheel', function(e) {
+    if (e.ctrlKey) {
+        e.preventDefault();
+        showZoomNotification();
+    }
+}, { passive: false });
+
+function showZoomNotification() {
+    const notification = document.getElementById('notification');
+    notification.textContent = "Zooming is not allowed on this website";
+    notification.classList.add('show');
+    
+    setTimeout(() => {
+        notification.classList.remove('show');
+    }, 3000);
+}
+
+// Block inspect element
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+    showInspectNotification();
+});
+
+document.onkeydown = function(e) {
+    if (e.keyCode == 123 || // F12
+        (e.ctrlKey && e.shiftKey && e.keyCode == 73) || // Ctrl+Shift+I
+        (e.ctrlKey && e.shiftKey && e.keyCode == 74) || // Ctrl+Shift+J
+        (e.ctrlKey && e.keyCode == 85)) { // Ctrl+U
+        e.preventDefault();
+        showInspectNotification();
+    }
+};
+
+function showInspectNotification() {
+    const notification = document.getElementById('notification');
+    notification.textContent = "Inspect element is disabled on this website";
+    notification.classList.add('show');
+    
+    setTimeout(() => {
+        notification.classList.remove('show');
+    }, 3000);
+}
+</script>
 
     <script src="script.js"></script>
 </body>
